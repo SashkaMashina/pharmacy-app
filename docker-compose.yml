@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: pharmacy-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=pharmacy_db
+    volumes:
+      - pharmacy_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - pharmacy_network
+
+  backend:
+    build:
+      context: ./backend
+    container_name: pharmacy-backend
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=pharmacy_db
+      - DATABASE_URL=postgresql+asyncpg://postgres:password@db/pharmacy_db
+    networks:
+      - pharmacy_network
+
+networks:
+  pharmacy_network:
+    driver: bridge
+
+volumes:
+  pharmacy_db_data:
