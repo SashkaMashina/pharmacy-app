@@ -15,6 +15,22 @@ services:
     networks:
       - pharmacy_network
 
+  backend:
+    build:
+      context: ./backend
+    container_name: pharmacy-backend
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=pharmacy_db
+      - DATABASE_URL=postgresql+asyncpg://postgres:password@db/pharmacy_db
+    networks:
+      - pharmacy_network
+
 networks:
   pharmacy_network:
     driver: bridge
