@@ -37,6 +37,8 @@ class Reservation(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_email = Column(String, nullable=False)
+    name = Column(String, nullable=False)
+    phone = Column(String, nullable=False)
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
     quantity = Column(Integer, nullable=False)
     status = Column(Enum("pending", "confirmed", "canceled", name="reservation_status"), default="pending")
