@@ -28,6 +28,9 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=pharmacy_db
       - DATABASE_URL=postgresql+asyncpg://postgres:password@db/pharmacy_db
+    volumes:
+      - ./backend:/app
+    working_dir: /app
     networks:
       - pharmacy_network
 

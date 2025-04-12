@@ -1,6 +1,13 @@
-import os
-from dotenv import load_dotenv
+from pydantic_settings import BaseSettings
 
-load_dotenv()  # Загружаем переменные окружения
+class Settings(BaseSettings):
+    SECRET_KEY: str
+    ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
+    DATABASE_URL: str
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://user:password@localhost:5432/pharmacy_db") # 2-ой аргумент - это значение по умолчанию, если переменная DATABASE_URL не установлена
+    class Config:
+        env_file = ".env"  # Путь к файлу .env
+
+# Создание экземпляра настроек
+settings = Settings()
