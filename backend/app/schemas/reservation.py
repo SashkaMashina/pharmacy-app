@@ -1,23 +1,22 @@
 from pydantic import BaseModel, EmailStr
+from typing import List
 import datetime
+from .reservation_item import ReservationItemCreate, ReservationItemResponse
 
 class ReservationBase(BaseModel):
+    user_name: str
+    user_phone: str
     user_email: EmailStr
-    name: str
-    phone: str
-    product_id: int
-    quantity: int
     status: str  # pending, confirmed, canceled
+    sum: float
 
-class ReservationCreate(ReservationBase):  # Для создания бронирования
-    pass
+class ReservationCreate(ReservationBase):
+    items: List[ReservationItemCreate]
 
-class ReservationUpdate(BaseModel):  # Для обновления бронирования
-    status: str
-
-class ReservationResponse(ReservationBase):  # Для ответа API
+class ReservationResponse(ReservationBase):
     id: int
     created_at: datetime.datetime
+    items: List[ReservationItemResponse]
 
     class Config:
         from_attributes = True
