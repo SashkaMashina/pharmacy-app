@@ -11,6 +11,7 @@ class ProductBase(BaseModel):
     image_url: Optional[HttpUrl] = None
     manufacturer: Optional[str] = None
     release_form: Optional[str] = None
+    prescription_required: bool
 
 class ProductCreate(ProductBase):  # Для создания продукта
     pass
