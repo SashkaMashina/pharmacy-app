@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Text, Enum, DateTime
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Text, Enum, DateTime, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
@@ -11,8 +11,8 @@ class Category(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, nullable=False)
 
-    # Связь: у категории могут быть товары
     products = relationship("Product", back_populates="category")
+
 
 class Product(Base):
     __tablename__ = "products"
@@ -26,31 +26,44 @@ class Product(Base):
     image_url = Column(String)
     manufacturer = Column(String)
     release_form = Column(String)
+    prescription_required = Column(Boolean, default=False)  # новое поле: нужен ли рецепт
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
 
-    # Связь: товар относится к одной категории
     category = relationship("Category", back_populates="products")
+    reservation_items = relationship("ReservationItem", back_populates="product")
+
 
 class Reservation(Base):
     __tablename__ = "reservations"
 
     id = Column(Integer, primary_key=True, index=True)
+    user_name = Column(String, nullable=False)
+    user_phone = Column(String, nullable=False)
     user_email = Column(String, nullable=False)
-    name = Column(String, nullable=False)
-    phone = Column(String, nullable=False)
-    product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
-    quantity = Column(Integer, nullable=False)
     status = Column(Enum("pending", "confirmed", "canceled", name="reservation_status"), default="pending")
+    total_sum = Column(Float, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
-    # Связь: заказ связан с товаром
-    product = relationship("Product")
+    items = relationship("ReservationItem", back_populates="reservation")
 
-class User(Base):
-    __tablename__ = "users"
+
+class ReservationItem(Base):
+    __tablename__ = "reservation_items"
+
+    id = Column(Integer, primary_key=True)
+    reservation_id = Column(Integer, ForeignKey("reservations.id"), nullable=False)
+    product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
+    quantity = Column(Integer, nullable=False)
+    price = Column(Float, nullable=False)  # цена на момент заказа
+
+    reservation = relationship("Reservation", back_populates="items")
+    product = relationship("Product", back_populates="reservation_items")
+
+
+class Admin(Base):
+    __tablename__ = "admins"
 
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, nullable=False)
+    username = Column(String, unique=True, index=True, nullable=False)
     password_hash = Column(String, nullable=False)
-    role = Column(Enum("admin", "customer", name="user_roles"), default="customer")
