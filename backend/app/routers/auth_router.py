@@ -2,8 +2,8 @@ from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
-from app.schemas.auth import LoginRequest, TokenResponse
-from app.models.admin import Admin
+from app.schemas.admin import LoginRequest, TokenResponse
+from app.models.models import Admin
 from passlib.context import CryptContext
 from jose import jwt, JWTError
 from app.core.config import settings
