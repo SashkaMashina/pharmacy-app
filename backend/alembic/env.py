@@ -4,8 +4,12 @@ from logging.config import fileConfig
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy import pool
 from alembic import context
-from app.core.database import DATABASE_URL  # Импортируем URL базы данных
-from app.models.base import Base  # Импортируем Base, чтобы Alembic видел модели
+
+from app.core.config import settings  # Импортируем настройки
+from app.models.base import Base      # Импортируем Base, чтобы Alembic видел модели
+
+# Берем URL базы данных из настроек
+DATABASE_URL = settings.DATABASE_URL
 
 # Настройка логирования из alembic.ini
 config = context.config
