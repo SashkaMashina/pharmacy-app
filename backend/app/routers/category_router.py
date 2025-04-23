@@ -4,7 +4,7 @@ from app.models import models
 from app.schemas.category import CategoryCreate, CategoryUpdate, CategoryResponse
 from app.core.database import get_db
 
-router = APIRouter()
+router = APIRouter(tags=["Categories"])
 
 @router.post("/categories/", response_model=CategoryResponse)
 def create_category(category: CategoryCreate, db: Session = Depends(get_db)):
