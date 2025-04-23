@@ -5,7 +5,7 @@ from app.schemas.product import ProductCreate, ProductUpdate, ProductResponse
 from app.core.database import get_db  # для работы с БД
 from sqlalchemy import or_
 
-router = APIRouter()
+router = APIRouter(tags=["Products"])
 
 # Эндпоинт для создания продукта
 @router.post("/products/", response_model=ProductResponse)
