@@ -4,7 +4,7 @@ from app.models import models
 from app.schemas.reservation import ReservationCreate, ReservationResponse, ReservationUpdate
 from app.core.database import get_db
 
-router = APIRouter(tags=["Reservations"])
+router = APIRouter(prefix="/reservations", tags=["Reservations"])
 
 # Создание бронирования
 @router.post("/", response_model=ReservationResponse)
