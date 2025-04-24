@@ -21,7 +21,6 @@ services:
     container_name: pharmacy-backend
     depends_on:
       - db
-      - db-init
     ports:
       - "8000:8000"
     environment:
@@ -34,32 +33,6 @@ services:
       - ACCESS_TOKEN_EXPIRE_MINUTES=30
     networks:
       - pharmacy_network
-
-  db-init:
-    build:
-      context: ./backend
-    container_name: pharmacy-db-init
-    depends_on:
-      - db
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=pharmacy_db
-      - DATABASE_URL=postgresql+asyncpg://postgres:password@db/pharmacy_db
-      - SECRET_KEY=supersecretkey123
-      - ALGORITHM=HS256
-      - ACCESS_TOKEN_EXPIRE_MINUTES=30
-    networks:
-      - pharmacy_network
-    command: >
-      sh -c "
-        echo ' Waiting for DB...' &&
-        sleep 5 &&
-        alembic upgrade head &&
-        echo ' Migrations done!' &&
-        python app/utils/seed_db.py &&
-        echo ' Seed completed!'
-      "
 
 networks:
   pharmacy_network:
