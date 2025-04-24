@@ -8,7 +8,7 @@ class ReservationBase(BaseModel):
     user_phone: str
     user_email: EmailStr
     status: str  # pending, confirmed, canceled
-    sum: float
+    total_sum: float
 
 class ReservationCreate(ReservationBase):
     items: List[ReservationItemCreate]
@@ -23,7 +23,7 @@ class ReservationUpdate(BaseModel):
     user_name: Optional[str] = None
     user_phone: Optional[str] = None
     user_email: Optional[EmailStr] = None
-    sum: Optional[float] = None
+    total_sum: Optional[float] = None
 
     class Config:
         from_attributes = True
