@@ -13,10 +13,11 @@ async def seed():
     async with async_session() as db:
 
         # Очистка БД
-        await db.execute(text('DELETE FROM reservation_item'))
-        await db.execute(text('DELETE FROM reservation'))
-        await db.execute(text('DELETE FROM product'))
-        await db.execute(text('DELETE FROM category'))
+        await db.execute(text('DELETE FROM reservation_items'))
+        await db.execute(text('DELETE FROM reservations'))
+        await db.execute(text('DELETE FROM products'))
+        await db.execute(text('DELETE FROM categories'))
+        await db.execute(text('DELETE FROM admins'))
         await db.commit()
 
         # 1. Категории
