@@ -1,4 +1,9 @@
 import datetime
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from app.core.database import async_session
 from app.models import models
 from sqlalchemy import text
@@ -185,6 +190,25 @@ async def seed():
         ]
         db.add_all(items)
         await db.commit()
+
+        # 5. Администратор
+        admin_username = "admin_pharmacy"
+        admin_password_hash = "$2b$12$8JX6uWWK6.s4CCIMqSuYYeDfWWwGpl8tIas87GuBmczrNauuJ37Nm" 
+
+        existing_admin = await db.execute(
+            text("SELECT * FROM admins WHERE username = :username"),
+            {"username": admin_username}
+        )
+        if not existing_admin.first():
+            admin = models.Admin(
+                username=admin_username,
+                password_hash=admin_password_hash
+            )
+            db.add(admin)
+            await db.commit()
+            print(f"👤 Администратор '{admin_username}' добавлен.")
+        else:
+            print(f"ℹ️ Администратор '{admin_username}' уже существует.")
 
     print("✅ Seed-данные успешно добавлены.")
 
