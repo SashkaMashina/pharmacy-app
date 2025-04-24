@@ -13,6 +13,13 @@ class ProductBase(BaseModel):
     release_form: Optional[str] = None
     prescription_required: bool
 
+    # Метод для преобразования HttpUrl в строку, если URL задан
+    def dict(self, *args, **kwargs):
+        data = super().dict(*args, **kwargs)
+        if data.get('image_url') and isinstance(data['image_url'], HttpUrl):
+            data['image_url'] = str(data['image_url'])  # Преобразуем в строку
+        return data
+
 class ProductCreate(ProductBase):  # Для создания продукта
     pass
 
@@ -25,4 +32,4 @@ class ProductResponse(ProductBase):  # Для ответа API
     updated_at: datetime.datetime
 
     class Config:
-        from_attributes = True  # Чтобы работало с SQLAlchemy
+        orm_mode = True  # Чтобы работало с SQLAlchemy
