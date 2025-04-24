@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
 from app.models import models
 from app.schemas.category import CategoryCreate, CategoryUpdate, CategoryResponse
 from app.core.database import get_db
@@ -7,40 +8,45 @@ from app.core.database import get_db
 router = APIRouter(tags=["Categories"])
 
 @router.post("/categories/", response_model=CategoryResponse)
-def create_category(category: CategoryCreate, db: Session = Depends(get_db)):
+async def create_category(category: CategoryCreate, db: AsyncSession = Depends(get_db)):
     db_category = models.Category(name=category.name)
     db.add(db_category)
-    db.commit()
-    db.refresh(db_category)
+    await db.commit()
+    await db.refresh(db_category)
     return db_category
 
 @router.get("/categories/", response_model=list[CategoryResponse])
-def get_categories(db: Session = Depends(get_db)):
-    return db.query(models.Category).all()
+async def get_categories(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Category))
+    categories = result.scalars().all()
+    return categories
 
 @router.get("/categories/{id}/", response_model=CategoryResponse)
-def get_category(id: int, db: Session = Depends(get_db)):
-    category = db.query(models.Category).filter(models.Category.id == id).first()
+async def get_category(id: int, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Category).where(models.Category.id == id))
+    category = result.scalar_one_or_none()
     if not category:
         raise HTTPException(status_code=404, detail="Category not found")
     return category
 
 @router.put("/categories/{id}/", response_model=CategoryResponse)
-def update_category(id: int, update: CategoryUpdate, db: Session = Depends(get_db)):
-    category = db.query(models.Category).filter(models.Category.id == id).first()
+async def update_category(id: int, update: CategoryUpdate, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Category).where(models.Category.id == id))
+    category = result.scalar_one_or_none()
     if not category:
         raise HTTPException(status_code=404, detail="Category not found")
     if update.name is not None:
         category.name = update.name
-    db.commit()
-    db.refresh(category)
+    await db.commit()
+    await db.refresh(category)
     return category
 
 @router.delete("/categories/{id}/")
-def delete_category(id: int, db: Session = Depends(get_db)):
-    category = db.query(models.Category).filter(models.Category.id == id).first()
+async def delete_category(id: int, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(models.Category).where(models.Category.id == id))
+    category = result.scalar_one_or_none()
     if not category:
         raise HTTPException(status_code=404, detail="Category not found")
-    db.delete(category)
-    db.commit()
+    await db.delete(category)
+    await db.commit()
     return {"message": "Category deleted"}
