@@ -4,6 +4,7 @@ from sqlalchemy.future import select
 from app.models import models
 from app.schemas.product import ProductCreate, ProductUpdate, ProductResponse
 from app.core.database import get_db  # для работы с БД
+from fastapi import Query
 
 router = APIRouter(tags=["Products"])
 
@@ -23,6 +24,7 @@ async def get_products(
     category_id: int = None,
     category_name: str = None,
     prescription_required: bool = None,
+    sort_price: str = Query(None, regex="^(asc|desc)$"),
     db: AsyncSession = Depends(get_db)
 ):
     stmt = select(models.Product)
@@ -38,6 +40,12 @@ async def get_products(
             return []  # Если категория не найдена, возвращаем пустой список
     if prescription_required is not None:
         stmt = stmt.where(models.Product.prescription_required == prescription_required)
+        
+     # Добавляем сортировку по цене
+    if sort_price == "asc":
+        stmt = stmt.order_by(models.Product.price.asc())
+    elif sort_price == "desc":
+        stmt = stmt.order_by(models.Product.price.desc())
     
     result = await db.execute(stmt)
     products = result.scalars().all()  # Для получения всех продуктов
