@@ -6,6 +6,7 @@ from app.models import models
 from app.schemas.reservation import ReservationCreate, ReservationResponse, ReservationUpdate
 from app.core.database import get_db
 from sqlalchemy.exc import SQLAlchemyError
+from app.services.email_service import send_email
 
 router = APIRouter(prefix="/reservations", tags=["Reservations"])
 
@@ -24,6 +25,19 @@ async def create_reservation(reservation: ReservationCreate, db: AsyncSession = 
             )
             db.add(db_reservation)
             await db.flush()  # получаем ID новой записи
+            
+            # Отправляем email пользователю о бронировании
+            email_body = (
+                f"Здравствуйте, {reservation.user_name}!\n\n"
+                f"Вы успешно забронировали товары на сумму {reservation.total_sum:.2f} ₽.\n\n"
+                f"Мы сообщим, когда их можно будет забрать.\n"
+                f"Спасибо за бронирование!"
+            )
+            await send_email(
+                to_email=reservation.user_email,
+                subject="Ваше бронирование в аптеке",
+                body=email_body,
+            )
 
             # Добавляем позиции бронирования
             db_items = [
@@ -92,7 +106,9 @@ async def get_reservation(id: int, db: AsyncSession = Depends(get_db)):
 async def update_reservation_status(id: int, update: ReservationUpdate, db: AsyncSession = Depends(get_db)):
     result = await db.execute(
         select(models.Reservation)
-        .options(selectinload(models.Reservation.items))
+        .options(
+            selectinload(models.Reservation.items).selectinload(models.ReservationItem.product)
+        )
         .where(models.Reservation.id == id)
     )
     reservation = result.scalar_one_or_none()
@@ -103,5 +119,25 @@ async def update_reservation_status(id: int, update: ReservationUpdate, db: Asyn
         reservation.status = update.status
         await db.commit()
         await db.refresh(reservation)
+        
+        # Если бронирование подтверждено — отправляем письмо
+        if update.status == "confirmed":
+            items_list = "\n".join(
+                [
+                    f"- {item.product.name}: {item.quantity} шт. по {item.price:.2f} ₽"
+                    for item in reservation.items
+                ]
+            )
+            email_body = (
+                f"Здравствуйте, {reservation.user_name}!\n"
+                f"Товары можно забирать из пункта выдачи.\n\n"
+                f"Товары:\n{items_list}\n\n"
+                f"Спасибо, что выбрали нас!"
+            )
+            await send_email(
+                to_email=reservation.user_email,
+                subject="Товары поступили в пункт выдачи",
+                body=email_body,
+            )
 
     return reservation
