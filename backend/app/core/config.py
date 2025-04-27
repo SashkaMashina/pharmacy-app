@@ -5,6 +5,8 @@ class Settings(BaseSettings):
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int
     DATABASE_URL: str
+    SMTP_USER: str
+    SMTP_PASSWORD: str
 
     model_config = SettingsConfigDict(env_file=".env")  # Чтение переменных из файла .env
 
