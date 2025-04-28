@@ -1,14 +1,13 @@
-import React from "react";
+import React, { JSX } from "react";
 import { Htag } from "@/components";
 import { Button } from "@/components";
 import { P } from "@/components";
 import { Tag } from "@/components";
-import { Layout } from "@/layout/Layout";
+import { Layout, withLayout } from "@/layout/Layout";
 
-export default function Home() {
+function Home(): JSX.Element {
   return (
     <>
-    <Layout>
       <Htag tag="h1">Текст</Htag>
       <Button appearance="primary" arrow="right">Кнопка</Button>
       <Button appearance="ghost">Вторая кнопка</Button>
@@ -16,7 +15,8 @@ export default function Home() {
       <P size="m">Средний</P>
       <P size="l">Большой</P>
       <Tag color="green">Hello</Tag>
-      </Layout>
     </>
   );
 }
+
+export default withLayout(Home);
