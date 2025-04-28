@@ -2,6 +2,7 @@ import React from "react";
 import { Htag } from "@/components";
 import { Button } from "@/components";
 import { P } from "@/components";
+import { Tag } from "@/components";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
     <P size="s">Маленький</P>
     <P size="m">Средний</P>
     <P size="l">Большой</P>
+    <Tag color="green">Hello</Tag>
     </>
   );
 }

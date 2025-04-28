@@ -1,0 +1,12 @@
+.tag {
+    display: inline-block;
+}
+
+.white {
+    color: var(--white);
+}
+
+.green {
+    color: var(--green);
+}
+
