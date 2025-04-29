@@ -10,17 +10,22 @@
     transition: all 0.2s;
 }
 
-.primary {
+.green {
     color: var(--white);
-    background-color: var(--primary);
+    background-color: var(--green);
+
 }
 
-.primary svg {
+.green svg {
     fill: var(--white);
 }
 
-.primary:hover {
-    background-color: var(--primary-hover);
+.green:hover {
+    background-color: var(--green-hover);
+}
+
+.green:active {
+    background-color: var(--green-click);
 }
 
 .ghost {

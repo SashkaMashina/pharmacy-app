@@ -14,7 +14,7 @@ function Home(): JSX.Element {
   return (
     <>
       <Htag tag="h1">Текст</Htag>
-      <Button appearance="primary" arrow="right">Кнопка</Button>
+      <Button appearance="green" arrow="right">Кнопка</Button>
       <Button appearance="ghost">Вторая кнопка</Button>
       <P size="s">Маленький</P>
       <P size="m">Средний</P>
