@@ -1,12 +1,17 @@
 .tag {
     display: inline-block;
+    font-family: var(--font-famaly);
 }
 
 .white {
     color: var(--white);
+    
 }
 
 .green {
     color: var(--green);
 }
 
+.a {
+    text-decoration: none;
+}

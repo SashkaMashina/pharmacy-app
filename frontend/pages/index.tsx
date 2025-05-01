@@ -13,13 +13,6 @@ function Home(): JSX.Element {
 
   return (
     <>
-      <Htag tag="h1">Текст</Htag>
-      <Button appearance="green" arrow="right">Кнопка</Button>
-      <Button appearance="ghost">Вторая кнопка</Button>
-      <P size="s">Маленький</P>
-      <P size="m">Средний</P>
-      <P size="l">Большой</P>
-      <Tag color="green">Hello</Tag>
       <LoginForm onLogin={handleLogin} />
     </>
   );

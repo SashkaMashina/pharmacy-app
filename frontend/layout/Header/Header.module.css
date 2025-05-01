@@ -1,0 +1,51 @@
+.header {
+  background-color: var(--green);
+  padding: 1rem var(--horizontal-padding);
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.leftGroup {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: var(--horizontal-padding);
+}
+
+.navigation {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 24px;
+  align-items: center;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.link {
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.link:hover {
+  color: var(--green-hover);
+}
+
+.login {
+  margin-left: auto;
+  margin-right: var(--horizontal-padding); 
+}
