@@ -4,14 +4,12 @@
 }
 
 .white {
-    color: var(--white);
-    
+    color: var(--white); 
+    text-decoration: none;
 }
 
 .green {
     color: var(--green);
-}
-
-.a {
     text-decoration: none;
 }
+

@@ -28,7 +28,7 @@ export const LoginForm = ({
       className={cn(styles.form, className)}
       {...props}
     >
-      <P size="l" className={styles.title}>Вход в систему</P>
+      <P size="x" className={styles.title}>Вход в систему</P>
 
       <div className={styles.inputGroup}>
         <div className={styles.inputContainer}>

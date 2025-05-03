@@ -11,11 +11,13 @@ import { Footer } from "./Footer/Footer";
 export const Layout = ({children}: LayoutProps): JSX.Element => {
     return(
         <>
+        <div className={styles.layout}>
             <Header/>
-            <div>
-                {children}
-            </div>
+                <div className={styles.content}>
+                    {children}
+                </div>
             <Footer/>
+        </div>
         </>
     )
 };
