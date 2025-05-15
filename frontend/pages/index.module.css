@@ -26,9 +26,19 @@
 .container {
     display: flex;
     flex-direction: column;
+    padding: 0px;
+    margin-bottom: 63px;
+    margin-top: 63px;
 }
 
 .statusButton {
     width: 192px;
     height: 48px;
+    cursor: pointer;
+    transform: 2s;
 }
+
+.orderContainer {
+    margin-top: 48px;
+}
+

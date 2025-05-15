@@ -48,9 +48,17 @@
 }
 
 .ghost {
-    border-color: var(--green);
+    border: 1px solid var(--green); 
     background: transparent;
     font-family: var(--font-family);
     font-size: 14px;
-    border-width: 1px;
+    color: var(--green); 
+    transition: all 0.3s ease; 
+    cursor: pointer; 
+}
+
+.ghost:hover { 
+    background-color: var(--green-hover); 
+    color: white;  
+    transform: scale(1.02); 
 }

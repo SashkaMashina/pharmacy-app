@@ -1,0 +1,53 @@
+/* OrderTable.module.css */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  border: 1px solid var(--green);
+}
+
+/* Стили для обычных ячеек */
+.ordersTable td {
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid var(--green);
+}
+
+/* Особые стили для строки заголовков */
+.ordersTable .headerRow th {
+  padding: 12px 16px;
+  text-align: left;
+  background-color: var(--table-green); /* Цвет фона */
+  color: var(--black); /* Цвет текста */
+  border: none; /* Убираем границы */
+  border-bottom: 2px solid var(--green-dark); /* Только нижняя граница */
+}
+
+.phoneLink,
+.emailLink {
+  color: var(--black);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.phoneLink:hover,
+.emailLink:hover {
+  color: var(--green-dark);
+  text-decoration: underline;
+}
+
+.detailsButton {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
