@@ -5,7 +5,7 @@ import styles from'./Button.module.css'
 import cn from 'classnames'
 import { Span } from "next/dist/trace";
 
-export const Button = ({ appearance, arrow = 'none',  children, className, ...props}: ButtonProps): JSX.Element => {
+export const Button = ({ appearance, icon = 'none',  children, className, ...props}: ButtonProps): JSX.Element => {
     return(
         <button
         className={cn(styles.button, className, {
@@ -15,11 +15,10 @@ export const Button = ({ appearance, arrow = 'none',  children, className, ...pr
         {...props}
         >
             {children}
-            {arrow !== 'none' && <span className={cn(styles.arrow, {
-                [styles.down]: arrow == 'down',
-                [styles.right]: arrow == 'right'
+            {icon !== 'none' && <span className={cn(styles.icon, {
+                [styles.search]: icon == 'search'
             })}>
-                <img src="/icons/ArrowRight.svg"></img>
+                <img src="/icons/icon-wrapper.svg"></img>
                 </span>}
         </button>
     )

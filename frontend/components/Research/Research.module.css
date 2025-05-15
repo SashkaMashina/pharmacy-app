@@ -1,0 +1,82 @@
+.form {
+  max-width: 500px;
+}
+
+.searchContainer {
+  position: relative;
+}
+
+.inputWrapper {
+  display: flex;
+  position: relative;
+}
+
+.input {
+  padding: 12px 50px 12px 16px;
+  font-size: 16px;
+  transition: border 0.3s;
+  border-radius: 5px;
+  border: 1px solid var(--green);
+  width: 240px;
+  height: 32px;
+}
+
+.input:focus {
+  border-color: var(--green-dark);
+  outline: none;
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
+.searchButton {
+  position: absolute;
+  right: 5px;
+  height: 32px;
+  width: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--green);
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.calendarButton {
+  position: absolute;
+  left: 5px;
+  height: 32px;
+  width: 74px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-right: 1px solid var(--green);
+  border-radius: 5px 0px 0px 5px;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.searchIcon {
+  color: var(--green);
+  width: 20px;
+  height: 20px;
+}
+
+.icon {
+    color: var(--black);
+    text-align:left;
+    font-size:14px;
+    font-family:var(--font-family);
+}
