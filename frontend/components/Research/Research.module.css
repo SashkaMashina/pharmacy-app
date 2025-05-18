@@ -1,6 +1,3 @@
-.form {
-  max-width: 500px;
-}
 
 .searchContainer {
   position: relative;
@@ -17,8 +14,15 @@
   transition: border 0.3s;
   border-radius: 5px;
   border: 1px solid var(--green);
-  width: 240px;
   height: 32px;
+}
+
+.inputS {
+  width: 240px;
+}
+
+.inutM {
+  width: 768px;
 }
 
 .input:focus {

@@ -1,44 +1,77 @@
-.searchBlock {
-    background-color: var(--medium-green);
-    width: 1120px;
-    height: 56px;   
+/* index.module.css */
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.findContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    position: relative;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
-.statusBlock {
-    background-color: var(--medium-green);
-    width: 1120px;
-    height: 56px;   
+.find {
+    flex-grow: 1;
+}
+
+.mainContent {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    gap: 30px;
-    margin-top: 48px;
+    gap: 20px;
 }
 
-.container {
+.sidebar {
+    flex: 0 0 auto;
+    min-width: 250px;
+}
+
+.filters {
+    background-color: var(--green-light);
+    border-radius: 5px;
+    border: 1px solid var(--black);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.filterTitle {
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.filterOptions {
     display: flex;
     flex-direction: column;
-    padding: 0px;
-    margin-bottom: 63px;
-    margin-top: 63px;
+    gap: 8px;
 }
 
-.statusButton {
-    width: 192px;
-    height: 48px;
+.filterItem {
+    font-size: 14px;
+    color: var(--black);
     cursor: pointer;
-    transform: 2s;
 }
 
-.orderContainer {
-    margin-top: 48px;
+.filterItem:hover {
+    color: var(--green);
 }
 
+.filterButton {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.products {
+    flex: 1;
+}
+
+.title {
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.medicinesList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

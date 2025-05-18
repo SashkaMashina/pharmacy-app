@@ -1,0 +1,48 @@
+.searchBlock {
+    background-color: var(--medium-green);
+    width: 1120px;
+    height: 56px;   
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 10px;
+}
+
+.statusBlock {
+    background-color: var(--medium-green);
+    width: 1120px;
+    height: 56px;   
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 30px;
+    margin-top: 48px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    margin-bottom: 63px;
+    margin-top: 63px;
+}
+
+.statusButton {
+    width: 192px;
+    height: 48px;
+    cursor: pointer;
+    transform: 2s;
+}
+
+.orderContainer {
+    margin-top: 48px;
+}
+
+
+.find {
+    
+}

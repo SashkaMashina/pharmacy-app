@@ -6,4 +6,5 @@ export interface ResearchProps
   error?: string;
   placeholder?: string;
   icon?: "right" | "left";
+  size: "s" | "m";
 }

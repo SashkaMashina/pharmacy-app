@@ -12,6 +12,7 @@ export const Research = ({
   className,
   placeholder,
   icon,
+  size,
   ...props
 }: ResearchProps): JSX.Element => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -35,8 +36,12 @@ export const Research = ({
             placeholder={placeholder}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className={styles.input}
+            className={cn(styles.input, className, {
+                [styles.inputS]: size == 's',
+                [styles.inutM]: size == 'm',
+            })} 
             required
+
           />
           <Button
             className={cn(styles.icon, className, {

@@ -1,0 +1,19 @@
+.card {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--green-light);
+    width: 100%;
+}
+
+.name {
+    font-weight: 500;
+}
+
+
+.button {
+    width: 100%;
+    padding: 8px;
+}
+

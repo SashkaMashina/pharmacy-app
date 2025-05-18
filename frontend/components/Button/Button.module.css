@@ -1,52 +1,3 @@
-.form {
-  display: flex;
-  max-width: 500px;
-  gap: 12px;
-}
-
-.searchContainer {
-  display: flex;
-  width: 100%;
-  gap: 8px;
-}
-
-.inputGroup {
-  flex-grow: 1;
-}
-
-.input {
-  padding: 12px 16px;
-  font-size: 16px;
-  transition: border 0.3s;
-  border-radius: 5px;
-  border: 1px solid var(--green);
-  width: 100%;
-  height: 40px;
-}
-
-.input:focus {
-  border-color: var(--green-dark);
-  outline: none;
-}
-
-.error {
-  color: var(--error);
-  font-size: 0.875rem;
-  margin-top: -0.5rem;
-}
-
-.searchButton {
-  height: 40px;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.searchIcon {
-  color: white;
-}
-
 .ghost {
     border: 1px solid var(--green); 
     background: transparent;
@@ -61,4 +12,44 @@
     background-color: var(--green-hover); 
     color: white;  
     transform: scale(1.02); 
+}
+
+
+
+.button {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.green {
+    color: var(--white);
+    background-color: var(--green);
+
+}
+
+
+.green:hover {
+    background-color: var(--green-hover);
+}
+
+.green:active {
+    background-color: var(--green-click);
+}
+
+
+.arrow {
+    display: block;
+    margin-left: 10px;
+}
+
+.down {
+    transform: rotate(90deg);
+    transform: all 0.2s;
 }

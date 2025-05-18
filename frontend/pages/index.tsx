@@ -1,138 +1,55 @@
-import React, { JSX, useState } from "react";
-import { Htag } from "@/components";
-import { Button } from "@/components";
-import { P } from "@/components";
-import { Tag } from "@/components";
+// index.tsx
+import React, { JSX } from "react";
+import { Button, P, Research, Medicine } from "@/components";
 import { Layout, withLayout } from "@/layout/Layout";
-import { LoginForm } from "@/components";
-import {Research} from"@/components"
-import {OrdersTable} from"@/components"
-import { queryObjects } from "v8";
-import styles from './index.module.css'
-
-interface Order {
-  id: number;
-  customerName: string;
-  phone: string;
-  email: string;
-  date: string;
-  orderDetails: string;
-  amount: number;
-  status: 'new' | 'assembling' | 'ready' | 'completed' | 'cancelled';
-}
-
-const mockOrders: Order[] = [
-  {
-    id: 1,
-    customerName: "Иванов Иван Иванович",
-    phone: "+7 (900) 123-45-67",
-    email: "ivanov@example.com",
-    date: "2023-05-20",
-    orderDetails: "Аспирин, Нурофен",
-    amount: 1250.50,
-    status: "new" // теперь TypeScript знает, что это допустимое значение
-  },
-  {
-    id: 2,
-    customerName: "Петрова Анна Сергеевна",
-    phone: "+7 (901) 234-56-78",
-    email: "petrova@example.com",
-    date: "2023-05-19",
-    orderDetails: "Лоратадин, Називин",
-    amount: 870.00,
-    status: "assembling" // тоже допустимое значение
-  },
-  {
-    id: 3,
-    customerName: "Петрова Анна Сергеевна",
-    phone: "+7 (901) 234-56-78",
-    email: "petrova@example.com",
-    date: "2023-05-19",
-    orderDetails: "Лоратадин, Називин",
-    amount: 870.00,
-    status: "assembling" // тоже допустимое значение
-  },
-  {
-    id: 4,
-    customerName: "Иванов Иван Иванович",
-    phone: "+7 (900) 123-45-67",
-    email: "ivanov@example.com",
-    date: "2023-05-20",
-    orderDetails: "Аспирин, Нурофен",
-    amount: 1250.50,
-    status: "new" // теперь TypeScript знает, что это допустимое значение
-  },
-  {
-    id: 5,
-    customerName: "Иванов Иван Иванович",
-    phone: "+7 (900) 123-45-67",
-    email: "ivanov@example.com",
-    date: "2023-05-20",
-    orderDetails: "Аспирин, Нурофен",
-    amount: 1250.50,
-    status: "new" // теперь TypeScript знает, что это допустимое значение
-  },
-  {
-    id: 6,
-    customerName: "Иванов Иван Иванович",
-    phone: "+7 (900) 123-45-67",
-    email: "ivanov@example.com",
-    date: "2023-05-20",
-    orderDetails: "Аспирин, Нурофен",
-    amount: 1250.50,
-    status: "new" // теперь TypeScript знает, что это допустимое значение
-  },
-    {
-    id: 7,
-    customerName: "Иванов Иван Иванович",
-    phone: "+7 (900) 123-45-67",
-    email: "ivanov@example.com",
-    date: "2023-05-20",
-    orderDetails: "Аспирин, Нурофен",
-    amount: 1250.50,
-    status: "new" // теперь TypeScript знает, что это допустимое значение
-  },
-];
+import styles from './index.module.css';
 
 function Home(): JSX.Element {
-  const [orders, setOrders] = useState(mockOrders);
-  const [activeStatus, setActiveStatus] = useState<string | null>(null);
-  
-  const handleSearch = (query: string) => {
-    console.log('Searching for:', query);
-  };
+    const handleSearch = (query: string) => {
+        console.log('Searching for:', query);
+    };
+    
+    const medicines = [
+        { name: "Аспирин", price: 100 },
+        { name: "Парацетамол", price: 80 },
+        { name: "Ибупрофен", price: 120 },
+        { name: "Анальгин", price: 90 },
+    ];
 
-    const handleStatusChange = (orderId: number, newStatus: string) => {
-      console.log(`Order ${orderId} status changed to ${newStatus}`);
-  };
-
-    const filteredOrders = activeStatus 
-    ? orders.filter(order => order.status === activeStatus)
-    : orders;
-  
-
-  return (
-    <>
-    <div className={styles.container}>
-      <div className={styles.searchBlock}>
-        <Research icon="left" onSearch={handleSearch}>ПОИСК</Research>
-        <Research icon="right" placeholder="ФИО покупателя" onSearch={handleSearch}>ПОИСК</Research>
-        <Research icon="right" placeholder="Номер телефона" onSearch={handleSearch}>ПОИСК</Research>
-        <Research icon="right" placeholder="Электронная почта" onSearch={handleSearch}>ПОИСК</Research>
-      </div>
-      <div className={styles.statusBlock}>
-        <Button className={styles.statusButton} appearance="ghost">Новый</Button>
-        <Button className={styles.statusButton} appearance="ghost">В процессе сборки</Button>
-        <Button className={styles.statusButton} appearance="ghost">Готов к выдаче</Button>
-        <Button className={styles.statusButton} appearance="ghost">Завершен</Button>
-        <Button className={styles.statusButton} appearance="ghost">Отменен</Button>
-      </div>
-      <div className={styles.orderContainer}>
-        <OrdersTable orders={mockOrders} onStatusChange={handleStatusChange}></OrdersTable>
-      </div>
-    </div>
-    </>
-  );
+    return(
+        <div className={styles.wrapper}>
+            <div className={styles.findContainer}>
+                <Research size="m" className={styles.find} icon="right" placeholder="Поиск товара" onSearch={handleSearch}>
+                    ПОИСК
+                </Research>
+                <Button appearance="green">Форма обратной связи</Button>
+            </div>
+            
+            <P size="x" color="black" className={styles.title}>Каталог</P>
+            <div className={styles.mainContent}>
+                <div className={styles.sidebar}>
+                    <div className={styles.filters}>
+                        <div className={styles.filterOptions}>
+                            <span className={styles.filterItem}>Категории</span>
+                            <span className={styles.filterItem}>Отпуск из аптеки</span>
+                            <span className={styles.filterItem}>Сортировать по цене</span>
+                            <Button className={styles.filterButton} appearance="green">
+                                Сбросить фильтры
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div className={styles.products}>
+                    <div className={styles.medicinesList}>
+                        {medicines.map((medicine, index) => (
+                            <Medicine key={index} name={medicine.name} price={medicine.price} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default withLayout(Home);

@@ -12,7 +12,8 @@ export const P = ({ size, children, className, color = 'black', ...props}: PProp
         className={cn(styles.p, className, {
             [styles.s]: size == 's',
             [styles.m]: size == 'm',
-            [styles.m]: size == 'l',
+            [styles.l]: size == 'l',
+            [styles.x]: size == 'x',
             [styles.black]: color == 'black',
             [styles.white]: color == 'white',
             [styles.green]: color == 'green'
